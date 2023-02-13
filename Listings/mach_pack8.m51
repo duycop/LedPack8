@@ -1,0 +1,139 @@
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                    02/13/2023  14:37:02  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.2.0, INVOKED BY:
+D:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\CODE_LED_MATRIX_16COT.obj TO .\Objects\mach_pack8 PRINT (.\Listings\mach_pack8.m51
+>> )
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\CODE_LED_MATRIX_16COT.obj (CODE_LED_MATRIX_16COT)
+
+
+LINK MAP OF MODULE:  .\Objects\mach_pack8 (CODE_LED_MATRIX_16COT)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     00BCH     ABSOLUTE     
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\mach_pack8 (CODE_LED_MATRIX_16COT)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        CODE_LED_MATRIX_16COT
+  B:0020H.1       SYMBOL        BIT_LR
+  B:0020H.0       SYMBOL        BIT_PLAY
+  C:003AH         SYMBOL        CHECK_BUTTON
+  D:00B0H         SYMBOL        COT1
+  D:0090H         SYMBOL        COT2
+  N:0032H         SYMBOL        COT_BD
+  C:0022H         SYMBOL        DICH_PHAI
+  C:002EH         SYMBOL        DICH_TRAI
+  C:0038H         SYMBOL        DICH_XONG
+  C:004FH         SYMBOL        DISPLAY
+  N:0030H         SYMBOL        DK_COT1
+  N:0031H         SYMBOL        DK_COT2
+  D:00A0H         SYMBOL        HANG
+  C:0038H         SYMBOL        KO_DICH
+  C:005CH         SYMBOL        LAP_LAI
+  C:0010H         SYMBOL        MAIN
+  N:0000H         SYMBOL        MAX_PHAI
+  N:0029H         SYMBOL        MAX_TRAI
+  C:007CH         SYMBOL        MA_LED
+  N:0029H         SYMBOL        MIN_PHAI
+  N:0000H         SYMBOL        MIN_TRAI
+  B:0080H.0       SYMBOL        NUT
+  C:0044H         SYMBOL        NUT_KO_BAM
+  C:004EH         SYMBOL        NUT_KO_BAM2
+  B:0080H.1       SYMBOL        NUT_LR
+  D:0080H         SYMBOL        P0
+  D:0090H         SYMBOL        P1
+  D:00A0H         SYMBOL        P2
+  D:00B0H         SYMBOL        P3
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  02/13/2023  14:37:02  PAGE 2
+
+
+  C:0012H         SYMBOL        QUET1
+  C:0014H         SYMBOL        QUET2
+  C:002CH         SYMBOL        RESET
+  C:0038H         SYMBOL        RESET2
+  N:0034H         SYMBOL        VALUE_MAX
+  N:0033H         SYMBOL        VALUE_MIN
+  C:003FH         SYMBOL        WAIT_NHA_NUT
+  C:0049H         SYMBOL        WAIT_NHA_NUT2
+  C:0000H         LINE#         26
+  C:0003H         LINE#         27
+  C:0005H         LINE#         28
+  C:0007H         LINE#         30
+  C:000AH         LINE#         31
+  C:000DH         LINE#         33
+  C:0010H         LINE#         37
+  C:0012H         LINE#         39
+  C:0014H         LINE#         41
+  C:0016H         LINE#         42
+  C:0018H         LINE#         43
+  C:001AH         LINE#         44
+  C:001CH         LINE#         45
+  C:001FH         LINE#         46
+  C:0022H         LINE#         48
+  C:0024H         LINE#         49
+  C:0026H         LINE#         50
+  C:0029H         LINE#         51
+  C:002CH         LINE#         53
+  C:002EH         LINE#         55
+  C:0030H         LINE#         56
+  C:0032H         LINE#         57
+  C:0035H         LINE#         58
+  C:0038H         LINE#         62
+  C:003AH         LINE#         65
+  C:003DH         LINE#         66
+  C:003FH         LINE#         68
+  C:0041H         LINE#         69
+  C:0044H         LINE#         72
+  C:0047H         LINE#         73
+  C:0049H         LINE#         75
+  C:004BH         LINE#         76
+  C:004EH         LINE#         78
+  C:004FH         LINE#         82
+  C:0051H         LINE#         83
+  C:0054H         LINE#         84
+  C:0057H         LINE#         85
+  C:005AH         LINE#         86
+  C:005CH         LINE#         89
+  C:005DH         LINE#         90
+  C:005EH         LINE#         91
+  C:0060H         LINE#         92
+  C:0063H         LINE#         93
+  C:0066H         LINE#         94
+  C:0067H         LINE#         95
+  C:0068H         LINE#         96
+  C:0069H         LINE#         97
+  C:006BH         LINE#         98
+  C:006CH         LINE#         99
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  02/13/2023  14:37:02  PAGE 3
+
+
+  C:006EH         LINE#         100
+  C:0070H         LINE#         101
+  C:0071H         LINE#         102
+  C:0073H         LINE#         103
+  C:0076H         LINE#         104
+  C:0079H         LINE#         105
+  C:007BH         LINE#         106
+  -------         ENDMOD        CODE_LED_MATRIX_16COT
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 00BCH BYTE ( 9%) *
+******************************************************************************
+
+Program Size: data=8.0 xdata=0 code=188
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

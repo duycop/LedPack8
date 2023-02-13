@@ -1,0 +1,210 @@
+A51 MACRO ASSEMBLER  CODE_PACK8                                                           02/06/2023 14:18:02 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\code_pack8.obj
+ASSEMBLER INVOKED BY: D:\Keil_v5\C51\BIN\A51.EXE code_pack8.asm SET(SMALL) DEBUG PRINT(.\Listings\code_pack8.lst) OBJECT
+                      (.\Objects\code_pack8.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ;hien thi cac so 00..23 tren led7 thanh pack2
+  00A0                 2     led  equ p2
+  00B0                 3     q1   bit p3.0
+  00B1                 4     q2   bit p3.1
+  00B2                 5     q3   bit p3.2
+  00B3                 6     q4   bit p3.3
+  00B4                 7     q5   bit p3.4
+  00B5                 8     q6   bit p3.5
+  00B6                 9     q7   bit p3.6
+  00B7                10     q8   bit p3.7
+                      11             
+  0030                12     so_ngay   equ 30h
+  0031                13     so_thang  equ 31h
+  0032                14     so_tk     equ 32h
+  0033                15     so_nam    equ 33h
+                      16     
+  0034                17     max   equ 34h
+                      18     
+                      19             
+0000                  20     org 0
+                      21             
+0000 75B000           22             mov p3,#00h  ; tat all qi=0
+                      23             
+0003 75301A           24             mov so_ngay ,#26
+0006 75310C           25             mov so_thang,#12
+0009 753214           26             mov so_tk   ,#20
+000C 753317           27             mov so_nam  ,#23
+                      28             
+000F                  29             MAIN:           
+000F 1117             30                     acall display
+0011 11A0             31                     acall delay
+0013 117F             32                     acall next_day
+0015 80F8             33             JMP MAIN
+                      34             
+0017                  35             display:                
+0017 9000B9           36                     mov DPTR, #maled
+001A 75F00A           37                     mov  B,#10
+001D E530             38                     MOV  A,so_ngay
+001F 84               39                     DIV  AB
+0020 93               40                     MOVC A,@A+DPTR    ; LAY MA LED CUA DV
+0021 F5A0             41                     MOV  LED, A       ; HIEN THI SO DV
+0023 D2B0             42                     setb q1  ; dv bat dau sang
+0025 00               43                     nop      ; dv van sang
+0026 C2B0             44                     clr  q1  ; dv tat
+                      45     
+0028 E5F0             46                     MOV  A,B
+002A 93               47                     MOVC A,@A+DPTR    ; LAY MA LED CUA DV
+002B C2E7             48                     clr acc.7         ; bit dot =0 <=> SAN
+002D F5A0             49                     MOV  LED, A       ; HIEN THI SO DV
+002F D2B1             50                     setb q2  ; dv bat dau sang
+0031 00               51                     nop      ; dv van sang
+0032 C2B1             52                     clr  q2  ; dv tat
+                      53     
+0034 75F00A           54                     mov  B,#10
+0037 E531             55                     MOV  A,so_thang
+0039 84               56                     DIV  AB
+003A 93               57                     MOVC A,@A+DPTR    ; LAY MA LED CUA DV
+A51 MACRO ASSEMBLER  CODE_PACK8                                                           02/06/2023 14:18:02 PAGE     2
+
+003B F5A0             58                     MOV  LED, A       ; HIEN THI SO DV
+003D D2B2             59                     setb q3  ; dv bat dau sang
+003F 00               60                     nop      ; dv van sang
+0040 C2B2             61                     clr  q3  ; dv tat
+                      62     
+0042 E5F0             63                     MOV  A,B
+0044 93               64                     MOVC A,@A+DPTR    ; LAY MA LED CUA DV
+0045 C2E7             65                     clr acc.7         ; bit dot =0 <=> SAN
+0047 F5A0             66                     MOV  LED, A       ; HIEN THI SO DV
+0049 D2B3             67                     setb q4  ; dv bat dau sang
+004B 00               68                     nop      ; dv van sang
+004C C2B3             69                     clr  q4  ; dv tat
+                      70     
+004E 75F00A           71                     mov  B,#10
+0051 E532             72                     MOV  A,so_tk
+0053 84               73                     DIV  AB
+0054 93               74                     MOVC A,@A+DPTR    ; LAY MA LED CUA DV
+0055 F5A0             75                     MOV  LED, A       ; HIEN THI SO DV
+0057 D2B4             76                     setb q5  ; dv bat dau sang
+0059 00               77                     nop      ; dv van sang
+005A C2B4             78                     clr  q5  ; dv tat
+                      79     
+005C E5F0             80                     MOV  A,B
+005E 93               81                     MOVC A,@A+DPTR    ; LAY MA LED CUA DV
+005F F5A0             82                     MOV  LED, A       ; HIEN THI SO DV
+0061 D2B5             83                     setb q6  ; dv bat dau sang
+0063 00               84                     nop      ; dv van sang
+0064 C2B5             85                     clr  q6  ; dv tat
+                      86     
+0066 75F00A           87                     mov  B,#10
+0069 E533             88                     MOV  A,so_nam
+006B 84               89                     DIV  AB
+006C 93               90                     MOVC A,@A+DPTR    ; LAY MA LED CUA DV
+006D F5A0             91                     MOV  LED, A       ; HIEN THI SO DV
+006F D2B6             92                     setb q7  ; dv bat dau sang
+0071 00               93                     nop      ; dv van sang
+0072 C2B6             94                     clr  q7  ; dv tat
+                      95     
+0074 E5F0             96                     MOV  A,B
+0076 93               97                     MOVC A,@A+DPTR    ; LAY MA LED CUA DV
+0077 F5A0             98                     MOV  LED, A       ; HIEN THI SO DV
+0079 D2B7             99                     setb q8  ; dv bat dau sang
+007B 00              100                     nop      ; dv van sang
+007C C2B7            101                     clr  q8  ; dv tat
+                     102     
+007E 22              103     ret
+                     104             
+007F                 105             next_day:               
+007F 9000C3          106                     mov DPTR, #max_ngay
+0082 E531            107                     mov A,so_thang
+0084 93              108                     movc A,@A+DPTR
+0085 F534            109                     mov  max,A  ; max == ngay cuoi thang
+0087 0534            110                     inc  max
+0089 0530            111                     inc so_ngay  ; next ngay
+008B E530            112                     mov A, so_ngay
+008D B5340F          113                     cjne A,max,chua_qua_10
+0090 753001          114                             mov so_ngay,#1
+0093 0531            115                             inc so_thang   ; tang hang chuc
+0095 E531            116                             mov A,so_thang
+0097 B40D05          117                             cjne A,#13,chua_het_nam
+009A 753101          118                                     mov so_thang,#01
+009D 0533            119                                     inc so_nam
+009F                 120                             chua_het_nam:
+009F                 121                     chua_qua_10:
+                     122                     
+009F 22              123             ret
+A51 MACRO ASSEMBLER  CODE_PACK8                                                           02/06/2023 14:18:02 PAGE     3
+
+                     124             
+00A0                 125             DELAY:
+00A0 7914            126                     MOV R1,#20
+00A2 758901          127                     mov tmod,#01h
+00A5                 128                     lap:
+00A5 758C3C          129                             mov th0,#high(-50000)
+00A8 758AB0          130                             mov tl0,#low(-50000)
+00AB D28C            131                             setb tr0
+00AD                 132                             wait:
+00AD 1117            133                                     acall display
+00AF 308DFB          134                             jnb  tf0, wait ; lenh nhay
+00B2 C28C            135                             clr  tr0
+00B4 C28D            136                             clr  tf0
+00B6 D9ED            137                     DJNZ R1,lap
+00B8 22              138             RET
+                     139             
+00B9 C0F9A4B0        140             maled: db 11000000b,11111001b,10100100b,10110000b,10011001b,10010010b,10000010b,111
+                             11000b,10000000b,10010000b
+00BD 999282F8                
+00C1 8090                    
+00C3 001F1C1F        141             max_ngay: db 0,31,28,31,30,31,30,31,31,30,31,30,31
+00C7 1E1F1E1F                
+00CB 1F1E1F1E                
+00CF 1F                      
+                     142                        ;   1  2  3  4  5  6  7 8  9  10 11 12
+                     143     end
+A51 MACRO ASSEMBLER  CODE_PACK8                                                           02/06/2023 14:18:02 PAGE     4
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+ACC. . . . . . . .  D ADDR   00E0H   A   
+B. . . . . . . . .  D ADDR   00F0H   A   
+CHUA_HET_NAM . . .  C ADDR   009FH   A   
+CHUA_QUA_10. . . .  C ADDR   009FH   A   
+DELAY. . . . . . .  C ADDR   00A0H   A   
+DISPLAY. . . . . .  C ADDR   0017H   A   
+LAP. . . . . . . .  C ADDR   00A5H   A   
+LED. . . . . . . .  D ADDR   00A0H   A   
+MAIN . . . . . . .  C ADDR   000FH   A   
+MALED. . . . . . .  C ADDR   00B9H   A   
+MAX. . . . . . . .  N NUMB   0034H   A   
+MAX_NGAY . . . . .  C ADDR   00C3H   A   
+NEXT_DAY . . . . .  C ADDR   007FH   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+P3 . . . . . . . .  D ADDR   00B0H   A   
+Q1 . . . . . . . .  B ADDR   00B0H.0 A   
+Q2 . . . . . . . .  B ADDR   00B0H.1 A   
+Q3 . . . . . . . .  B ADDR   00B0H.2 A   
+Q4 . . . . . . . .  B ADDR   00B0H.3 A   
+Q5 . . . . . . . .  B ADDR   00B0H.4 A   
+Q6 . . . . . . . .  B ADDR   00B0H.5 A   
+Q7 . . . . . . . .  B ADDR   00B0H.6 A   
+Q8 . . . . . . . .  B ADDR   00B0H.7 A   
+SO_NAM . . . . . .  N NUMB   0033H   A   
+SO_NGAY. . . . . .  N NUMB   0030H   A   
+SO_THANG . . . . .  N NUMB   0031H   A   
+SO_TK. . . . . . .  N NUMB   0032H   A   
+TF0. . . . . . . .  B ADDR   0088H.5 A   
+TH0. . . . . . . .  D ADDR   008CH   A   
+TL0. . . . . . . .  D ADDR   008AH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR0. . . . . . . .  B ADDR   0088H.4 A   
+WAIT . . . . . . .  C ADDR   00ADH   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

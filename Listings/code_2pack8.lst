@@ -1,0 +1,341 @@
+A51 MACRO ASSEMBLER  CODE_2PACK8                                                          02/06/2023 15:14:16 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\code_2pack8.obj
+ASSEMBLER INVOKED BY: D:\Keil_v5\C51\BIN\A51.EXE code_2pack8.asm SET(SMALL) DEBUG PRINT(.\Listings\code_2pack8.lst) OBJE
+                      CT(.\Objects\code_2pack8.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ;hien thi cac so 00..23 tren led7 thanh pack2
+  0090                 2     led  equ p1
+  00A0                 3     q1   bit p2.0
+  00A1                 4     q2   bit p2.1
+  00A2                 5     q3   bit p2.2
+  00A3                 6     q4   bit p2.3
+  00A4                 7     q5   bit p2.4
+  00A5                 8     q6   bit p2.5
+  00A6                 9     q7   bit p2.6
+  00A7                10     q8   bit p2.7
+                      11             
+  00B0                12     q9    bit p3.0
+  00B1                13     q10   bit p3.1
+  00B2                14     q11   bit p3.2
+  00B3                15     q12   bit p3.3
+  00B4                16     q13   bit p3.4
+  00B5                17     q14   bit p3.5
+  00B6                18     q15   bit p3.6
+  00B7                19     q16   bit p3.7
+                      20             
+  0030                21     so_ngay   equ 30h
+  0031                22     so_thang  equ 31h
+  0032                23     so_tk     equ 32h
+  0033                24     so_nam    equ 33h
+                      25     
+  0034                26     max   equ 34h
+                      27             
+  0035                28     so_hh  equ 35h
+  0036                29     so_mm  equ 36h
+  0037                30     so_ss  equ 37h
+                      31     
+                      32             
+0000                  33     org 0
+0000 75A000           34             mov p2,#00h  ; tat all q1..8=0
+0003 75B000           35             mov p3,#00h  ; tat all q9..16=0
+                      36             
+0006 75301F           37             mov so_ngay ,#31
+0009 75310C           38             mov so_thang,#12
+000C 753214           39             mov so_tk   ,#20
+000F 753363           40             mov so_nam  ,#99
+                      41             
+0012 753517           42             mov so_hh, #23
+0015 75363B           43             mov so_mm, #59
+0018 753737           44             mov so_ss, #55
+                      45             
+001B                  46             MAIN:           
+001B 1123             47                     acall display
+001D 3141             48                     acall delay
+001F 11F3             49                     acall next_ss
+0021 80F8             50             JMP MAIN
+                      51             
+0023                  52             display:        
+                      53             
+0023 90015A           54                     mov DPTR, #maled
+                      55                     
+0026 75F00A           56                     mov  B,#10
+                      57                     
+A51 MACRO ASSEMBLER  CODE_2PACK8                                                          02/06/2023 15:14:16 PAGE     2
+
+0029 E530             58                     MOV  A,so_ngay
+002B 84               59                     DIV  AB
+002C 93               60                     MOVC A,@A+DPTR    ; LAY MA LED CUA CHUC
+002D F590             61                     MOV  LED, A       ; HIEN THI SO CHUC
+002F D2A0             62                     setb q1  ; dv bat dau sang
+0031 313F             63                     acall delay1      ; dv van sang
+0033 C2A0             64                     clr  q1  ; dv tat
+                      65     
+0035 E5F0             66                     MOV  A,B
+0037 93               67                     MOVC A,@A+DPTR    ; LAY MA LED CUA DV
+0038 C2E7             68                     clr acc.7         ; bit dot =0 <=> SAN
+003A F590             69                     MOV  LED, A       ; HIEN THI SO DV
+003C D2A1             70                     setb q2  ; dv bat dau sang
+003E 313F             71                     acall delay1      ; dv van sang
+0040 C2A1             72                     clr  q2  ; dv tat
+                      73     
+0042 75F00A           74                     mov  B,#10
+0045 E531             75                     MOV  A,so_thang
+0047 84               76                     DIV  AB
+0048 93               77                     MOVC A,@A+DPTR    ; LAY MA LED CUA CHUC
+0049 F590             78                     MOV  LED, A       ; HIEN THI SO CHUC
+004B D2A2             79                     setb q3  ; dv bat dau sang
+004D 313F             80                     acall delay1      ; dv van sang
+004F C2A2             81                     clr  q3  ; dv tat
+                      82     
+0051 E5F0             83                     MOV  A,B
+0053 93               84                     MOVC A,@A+DPTR    ; LAY MA LED CUA DV
+0054 C2E7             85                     clr acc.7         ; bit dot =0 <=> SAN
+0056 F590             86                     MOV  LED, A       ; HIEN THI SO DV
+0058 D2A3             87                     setb q4  ; dv bat dau sang
+005A 313F             88                     acall delay1      ; dv van sang
+005C C2A3             89                     clr  q4  ; dv tat
+                      90     
+005E 75F00A           91                     mov  B,#10
+0061 E532             92                     MOV  A,so_tk
+0063 84               93                     DIV  AB
+0064 93               94                     MOVC A,@A+DPTR    ; LAY MA LED CUA CHUC
+0065 F590             95                     MOV  LED, A       ; HIEN THI SO CHUC
+0067 D2A4             96                     setb q5  ; dv bat dau sang
+0069 313F             97                     acall delay1      ; dv van sang
+006B C2A4             98                     clr  q5  ; dv tat
+                      99     
+006D E5F0            100                     MOV  A,B
+006F 93              101                     MOVC A,@A+DPTR    ; LAY MA LED CUA DV
+0070 F590            102                     MOV  LED, A       ; HIEN THI SO DV
+0072 D2A5            103                     setb q6  ; dv bat dau sang
+0074 313F            104                     acall delay1      ; dv van sang
+0076 C2A5            105                     clr  q6  ; dv tat
+                     106     
+0078 75F00A          107                     mov  B,#10
+007B E533            108                     MOV  A,so_nam
+007D 84              109                     DIV  AB
+007E 93              110                     MOVC A,@A+DPTR    ; LAY MA LED CUA CHUC
+007F F590            111                     MOV  LED, A       ; HIEN THI SO CHUC
+0081 D2A6            112                     setb q7  ; dv bat dau sang
+0083 313F            113                     acall delay1      ; dv van sang
+0085 C2A6            114                     clr  q7  ; dv tat
+                     115     
+0087 E5F0            116                     MOV  A,B
+0089 93              117                     MOVC A,@A+DPTR    ; LAY MA LED CUA DV
+008A F590            118                     MOV  LED, A       ; HIEN THI SO DV
+008C D2A7            119                     setb q8  ; dv bat dau sang
+008E 313F            120                     acall delay1      ; dv van sang
+0090 C2A7            121                     clr  q8  ; dv tat
+                     122     
+                     123                     
+A51 MACRO ASSEMBLER  CODE_2PACK8                                                          02/06/2023 15:14:16 PAGE     3
+
+0092 75F00A          124                     mov  B,#10
+0095 E535            125                     MOV  A,so_hh
+0097 84              126                     DIV  AB
+0098 93              127                     MOVC A,@A+DPTR    ; LAY MA LED CUA CHUC
+0099 F590            128                     MOV  LED, A       ; HIEN THI SO CHUC
+009B D2B0            129                     setb q9  ; dv bat dau sang
+009D 313F            130                     acall delay1      ; dv van sang
+009F C2B0            131                     clr  q9  ; dv tat
+                     132     
+00A1 E5F0            133                     MOV  A,B
+00A3 93              134                     MOVC A,@A+DPTR    ; LAY MA LED CUA DV
+00A4 F590            135                     MOV  LED, A       ; HIEN THI SO DV
+00A6 D2B1            136                     setb q10  ; dv bat dau sang
+00A8 313F            137                     acall delay1      ; dv van sang
+00AA C2B1            138                     clr  q10  ; dv tat
+                     139                     
+                     140                     ;          Dgfedcba
+00AC 7590BF          141                     mov  LED, #10111111b ; dau tru
+00AF D2B2            142                     setb q11  ; dv bat dau sang
+00B1 313F            143                     acall delay1       ; dv van sang
+00B3 C2B2            144                     clr  q11  ; dv tat
+                     145     
+00B5 75F00A          146                     mov  B,#10
+00B8 E536            147                     MOV  A,so_mm
+00BA 84              148                     DIV  AB
+00BB 93              149                     MOVC A,@A+DPTR    ; LAY MA LED CUA CHUC
+00BC F590            150                     MOV  LED, A       ; HIEN THI SO CHUC
+00BE D2B3            151                     setb q12  ; dv bat dau sang
+00C0 313F            152                     acall delay1       ; dv van sang
+00C2 C2B3            153                     clr  q12  ; dv tat
+                     154     
+00C4 E5F0            155                     MOV  A,B
+00C6 93              156                     MOVC A,@A+DPTR    ; LAY MA LED CUA DV
+00C7 F590            157                     MOV  LED, A       ; HIEN THI SO DV
+00C9 D2B4            158                     setb q13  ; dv bat dau sang
+00CB 313F            159                     acall delay1      ; dv van sang
+00CD C2B4            160                     clr  q13  ; dv tat
+                     161                     
+00CF 7590BF          162                     mov  LED, #10111111b ; dau tru
+00D2 D2B5            163                     setb q14  ; dv bat dau sang
+00D4 313F            164                     acall delay1      ; dv van sang
+00D6 C2B5            165                     clr  q14  ; dv tat
+                     166     
+00D8 75F00A          167                     mov  B,#10
+00DB E537            168                     MOV  A,so_ss
+00DD 84              169                     DIV  AB
+00DE 93              170                     MOVC A,@A+DPTR    ; LAY MA LED CUA CHUC
+00DF F590            171                     MOV  LED, A       ; HIEN THI SO CHUC
+00E1 D2B6            172                     setb q15  ; dv bat dau sang
+00E3 313F            173                     acall delay1      ; dv van sang
+00E5 C2B6            174                     clr  q15  ; dv tat
+                     175     
+00E7 E5F0            176                     MOV  A,B
+00E9 93              177                     MOVC A,@A+DPTR    ; LAY MA LED CUA DV
+00EA F590            178                     MOV  LED, A       ; HIEN THI SO DV
+00EC D2B7            179                     setb q16  ; dv bat dau sang
+00EE 313F            180                     acall delay1      ; dv van sang
+00F0 C2B7            181                     clr  q16  ; dv tat
+00F2 22              182             ret
+                     183             
+00F3                 184             next_ss:
+00F3 0537            185                     inc so_ss
+00F5 E537            186                     mov A,so_ss
+00F7 B43C19          187                 cjne A,#60,not_next_mm
+00FA 753700          188                             mov so_ss,#0
+00FD 0536            189                             inc so_mm
+A51 MACRO ASSEMBLER  CODE_2PACK8                                                          02/06/2023 15:14:16 PAGE     4
+
+00FF E536            190                             mov A,so_mm
+0101 B43C0F          191                             cjne A,#60,not_next_hh
+0104 753600          192                                     mov so_mm,#0
+0107 0535            193                                     inc so_hh
+0109 E535            194                                     mov A,so_hh
+010B B41805          195                                     cjne A,#24,chua_het_ngay
+010E 753500          196                                             mov so_hh,#0
+0111 3114            197                                             acall next_day
+0113                 198                                     chua_het_ngay:
+0113                 199                             not_next_hh:
+0113                 200                     not_next_mm:
+0113 22              201             ret
+                     202             
+0114                 203             next_day:               
+0114 900164          204                     mov DPTR, #max_ngay
+0117 E531            205                     mov A,so_thang
+0119 93              206                     movc A,@A+DPTR
+011A F534            207                     mov  max,A  ; max == ngay cuoi thang
+011C 0534            208                     inc  max
+011E 0530            209                     inc so_ngay  ; next ngay
+0120 E530            210                     mov A, so_ngay
+0122 B53419          211                     cjne A,max,chua_qua_10
+0125 753001          212                             mov so_ngay,#1
+0128 0531            213                             inc so_thang   ; tang hang chuc
+012A E531            214                             mov A,so_thang
+012C B40D0F          215                             cjne A,#13,chua_het_nam
+012F 753101          216                                     mov so_thang,#01
+0132 0533            217                                     inc so_nam
+0134 E533            218                                     mov A,so_nam
+0136 B46405          219                                     cjne A,#100,chua_het_tk
+0139 0532            220                                             inc so_tk
+013B 753300          221                                             mov so_nam,#00
+013E                 222                                     chua_het_tk:
+013E                 223                             chua_het_nam:
+013E                 224                     chua_qua_10:
+                     225                     
+013E 22              226             ret
+                     227             
+013F                 228             delay1:
+013F 00              229                     nop
+0140 22              230             ret
+                     231             
+0141                 232             DELAY:
+0141 7914            233                     MOV R1,#20
+0143 758901          234                     mov tmod,#01h
+0146                 235                     lap:
+0146 758C3C          236                             mov th0,#high(-50000)
+0149 758AB0          237                             mov tl0,#low(-50000)
+014C D28C            238                             setb tr0
+014E                 239                             wait:
+014E 1123            240                                     acall display
+0150 308DFB          241                             jnb  tf0, wait ; lenh nhay
+0153 C28C            242                             clr  tr0
+0155 C28D            243                             clr  tf0
+0157 D9ED            244                     DJNZ R1,lap
+0159 22              245             RET
+                     246             
+015A C0F9A4B0        247             maled: db 11000000b,11111001b,10100100b,10110000b,10011001b,10010010b,10000010b,111
+                             11000b,10000000b,10010000b
+015E 999282F8                
+0162 8090                    
+                     248                     ;        0          1          2         3          4          5      6    
+                                 7         8          9
+0164 001F1C1F        249             max_ngay: db 0,31,28,31,30,31,30,31,31,30,31,30,31
+0168 1E1F1E1F                
+016C 1F1E1F1E                
+A51 MACRO ASSEMBLER  CODE_2PACK8                                                          02/06/2023 15:14:16 PAGE     5
+
+0170 1F                      
+                     250                        ;   1  2  3  4  5  6  7 8  9  10 11 12
+                     251     end
+A51 MACRO ASSEMBLER  CODE_2PACK8                                                          02/06/2023 15:14:16 PAGE     6
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+ACC. . . . . . . .  D ADDR   00E0H   A   
+B. . . . . . . . .  D ADDR   00F0H   A   
+CHUA_HET_NAM . . .  C ADDR   013EH   A   
+CHUA_HET_NGAY. . .  C ADDR   0113H   A   
+CHUA_HET_TK. . . .  C ADDR   013EH   A   
+CHUA_QUA_10. . . .  C ADDR   013EH   A   
+DELAY. . . . . . .  C ADDR   0141H   A   
+DELAY1 . . . . . .  C ADDR   013FH   A   
+DISPLAY. . . . . .  C ADDR   0023H   A   
+LAP. . . . . . . .  C ADDR   0146H   A   
+LED. . . . . . . .  D ADDR   0090H   A   
+MAIN . . . . . . .  C ADDR   001BH   A   
+MALED. . . . . . .  C ADDR   015AH   A   
+MAX. . . . . . . .  N NUMB   0034H   A   
+MAX_NGAY . . . . .  C ADDR   0164H   A   
+NEXT_DAY . . . . .  C ADDR   0114H   A   
+NEXT_SS. . . . . .  C ADDR   00F3H   A   
+NOT_NEXT_HH. . . .  C ADDR   0113H   A   
+NOT_NEXT_MM. . . .  C ADDR   0113H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+P3 . . . . . . . .  D ADDR   00B0H   A   
+Q1 . . . . . . . .  B ADDR   00A0H.0 A   
+Q10. . . . . . . .  B ADDR   00B0H.1 A   
+Q11. . . . . . . .  B ADDR   00B0H.2 A   
+Q12. . . . . . . .  B ADDR   00B0H.3 A   
+Q13. . . . . . . .  B ADDR   00B0H.4 A   
+Q14. . . . . . . .  B ADDR   00B0H.5 A   
+Q15. . . . . . . .  B ADDR   00B0H.6 A   
+Q16. . . . . . . .  B ADDR   00B0H.7 A   
+Q2 . . . . . . . .  B ADDR   00A0H.1 A   
+Q3 . . . . . . . .  B ADDR   00A0H.2 A   
+Q4 . . . . . . . .  B ADDR   00A0H.3 A   
+Q5 . . . . . . . .  B ADDR   00A0H.4 A   
+Q6 . . . . . . . .  B ADDR   00A0H.5 A   
+Q7 . . . . . . . .  B ADDR   00A0H.6 A   
+Q8 . . . . . . . .  B ADDR   00A0H.7 A   
+Q9 . . . . . . . .  B ADDR   00B0H.0 A   
+SO_HH. . . . . . .  N NUMB   0035H   A   
+SO_MM. . . . . . .  N NUMB   0036H   A   
+SO_NAM . . . . . .  N NUMB   0033H   A   
+SO_NGAY. . . . . .  N NUMB   0030H   A   
+SO_SS. . . . . . .  N NUMB   0037H   A   
+SO_THANG . . . . .  N NUMB   0031H   A   
+SO_TK. . . . . . .  N NUMB   0032H   A   
+TF0. . . . . . . .  B ADDR   0088H.5 A   
+TH0. . . . . . . .  D ADDR   008CH   A   
+TL0. . . . . . . .  D ADDR   008AH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR0. . . . . . . .  B ADDR   0088H.4 A   
+WAIT . . . . . . .  C ADDR   014EH   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

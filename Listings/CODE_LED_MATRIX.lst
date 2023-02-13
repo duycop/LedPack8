@@ -1,0 +1,129 @@
+A51 MACRO ASSEMBLER  CODE_LED_MATRIX                                                      02/13/2023 14:05:07 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\CODE_LED_MATRIX.obj
+ASSEMBLER INVOKED BY: D:\Keil_v5\C51\BIN\A51.EXE CODE_LED_MATRIX.ASM SET(SMALL) DEBUG PRINT(.\Listings\CODE_LED_MATRIX.l
+                      st) OBJECT(.\Objects\CODE_LED_MATRIX.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+  00B0                 1     COT  EQU P3
+  00A0                 2     HANG EQU P2
+                       3             
+  0030                 4     DK_COT EQU 30H
+  0031                 5     COT_BD EQU 31H
+                       6             
+  0090                 7     NUT    BIT P1.0
+                       8             
+  0000                 9     BIT_PLAY BIT 0   ; DIA CHI BIT == 0 QUYET DINH PLAY=1 OR PAUSE=0
+                      10             
+0000                  11     ORG 0
+0000 900049           12             MOV DPTR,#MA_LED   ; chuan bi vung du lieu
+0003 D200             13             SETB BIT_PLAY
+                      14             
+0005 753120           15             MOV COT_BD,#32
+0008                  16             MAIN:
+                      17                     ;DUNG NGUYEN LY QUET: MOI LAN SANG 1 COT: CAC COT CON LAI KO SANG
+                      18                     ;SANG CAC HANG NAO ??
+0008 7C63             19                     MOV R4,#99
+000A                  20                     QUET1:
+000A 7B19             21                     MOV R3,#25
+000C                  22                     QUET2:
+000C 1123             23                             ACALL CHECK_BUTTON
+000E 112E             24                             ACALL DISPLAY
+0010 DBFA             25                     DJNZ R3,QUET2
+0012 DCF6             26                     DJNZ R4,QUET1
+0014 30000A           27                     JNB BIT_PLAY, KO_DICH
+0017 1531             28                             DEC COT_BD
+0019 E531             29                             MOV A,COT_BD
+001B B4FF03           30                             CJNE A,#-1,RESET
+001E 753120           31                                     MOV COT_BD,#32
+0021                  32                             RESET:
+0021                  33                     KO_DICH:
+0021 80E5             34             JMP MAIN
+                      35             
+0023                  36             CHECK_BUTTON:  ; IF BUTTON PRESS: CHANGE BIT PLAY 0<=>1
+0023 209007           37                     JB NUT, NUT_KO_BAM
+0026 B200             38                             CPL BIT_PLAY    ; DAO BIT
+0028                  39                             WAIT_NHA_NUT:
+0028 112E             40                                     ACALL DISPLAY
+002A 3090FB           41                             JNB NUT, WAIT_NHA_NUT   ;DOI NHA BUTTON RA
+002D                  42                     NUT_KO_BAM:
+002D 22               43             RET
+                      44             
+                      45             ;HIEN THI 8 COT, TINH TU COT_BD  -> RA 8 COT CUA LED_MATRIX
+002E                  46             DISPLAY:
+002E A931             47                     MOV R1,COT_BD
+0030 753080           48                     MOV DK_COT,#10000000B     ; VI LED-MATRIX CHI CO 8 COT  
+0033 7A08             49                     MOV R2,#8   ; LAP 8 LAN
+0035                  50                     LAP_LAI:
+                      51                             ;LAY DC 1 COT
+0035 E9               52                             MOV A,R1
+0036 93               53                             MOVC A,@A+DPTR
+0037 F5A0             54                             MOV HANG, A      ; DUA MA LED RA 8 HANG DE HIEN THI
+0039 8530B0           55                             MOV COT,DK_COT   ; DUA 8 BIT TRONG DK_COT -> PORT COT
+003C 00               56                             NOP
+003D 75B000           57                             MOV COT,#00    ;TAT NO DI, TAT CA 8 COT
+A51 MACRO ASSEMBLER  CODE_LED_MATRIX                                                      02/13/2023 14:05:07 PAGE     2
+
+0040 09               58                             INC R1   ; NEXT COT
+0041 E530             59                             MOV A,DK_COT
+0043 03               60                             RR A
+0044 F530             61                             MOV DK_COT,A
+0046 DAED             62                     DJNZ R2,LAP_LAI  ; LAP 8 LAN    
+0048 22               63             RET
+                      64     
+                      65             ; dinh nghia truoc du lieu cho 8 cot
+0049                  66             ma_led: 
+0049 FFFFFFFF         67                     DB 0FFH,0FFH,0FFH,0FFH,0FFH,0FFH,0FFH,0FFH
+004D FFFFFFFF                
+0051 FEFDFBF7         68                     db 11111110b,   11111101b,      11111011b,      11110111b,      10101111b, 
+                                  10011111b,      10001111b,      11111111b,      10001111b,      10001111b,      100011
+                             11b,      11111001b,      11111001b,      10111110b,      10000000b,      10111110b,      1
+                             1111111b,      10000000b,      11111110b,      11111110b,      11000011b,      11111011b,      11000011b,      11111111b
+0055 AF9F8FFF                
+0059 8F8F8FF9                
+005D F9BE80BE                
+0061 FF80FEFE                
+0065 C3FBC3FF                
+0069 FFFFFFFF         69                     DB 0FFH,0FFH,0FFH,0FFH,0FFH,0FFH,0FFH,0FFH
+006D FFFFFFFF                
+                      70     
+                      71     
+                      72     
+                      73     END
+A51 MACRO ASSEMBLER  CODE_LED_MATRIX                                                      02/13/2023 14:05:07 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+BIT_PLAY . . . . .  B ADDR   0020H.0 A   
+CHECK_BUTTON . . .  C ADDR   0023H   A   
+COT. . . . . . . .  D ADDR   00B0H   A   
+COT_BD . . . . . .  N NUMB   0031H   A   
+DISPLAY. . . . . .  C ADDR   002EH   A   
+DK_COT . . . . . .  N NUMB   0030H   A   
+HANG . . . . . . .  D ADDR   00A0H   A   
+KO_DICH. . . . . .  C ADDR   0021H   A   
+LAP_LAI. . . . . .  C ADDR   0035H   A   
+MAIN . . . . . . .  C ADDR   0008H   A   
+MA_LED . . . . . .  C ADDR   0049H   A   
+NUT. . . . . . . .  B ADDR   0090H.0 A   
+NUT_KO_BAM . . . .  C ADDR   002DH   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+P3 . . . . . . . .  D ADDR   00B0H   A   
+QUET1. . . . . . .  C ADDR   000AH   A   
+QUET2. . . . . . .  C ADDR   000CH   A   
+RESET. . . . . . .  C ADDR   0021H   A   
+WAIT_NHA_NUT . . .  C ADDR   0028H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
